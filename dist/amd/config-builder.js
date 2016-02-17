@@ -1,4 +1,4 @@
-define(['exports'], function (exports) {
+define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
     'use strict';
 
     Object.defineProperty(exports, '__esModule', {
@@ -9,6 +9,8 @@ define(['exports'], function (exports) {
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+    var baseConfig = require('./i18n/base-config');
+
     var AureliaI18nConfigBuilder = (function () {
         function AureliaI18nConfigBuilder() {
             _classCallCheck(this, AureliaI18nConfigBuilder);
@@ -18,9 +20,29 @@ define(['exports'], function (exports) {
         }
 
         _createClass(AureliaI18nConfigBuilder, [{
+            key: 'extend',
+            value: function extend(destination, source) {
+                destination = destination || {};
+                source = source || {};
+                for (var property in source) {
+                    if (source.hasOwnProperty(property) && source[property] && source[property].constructor && source[property].constructor === Object) {
+                        if (!(destination[property] && destination[property].constructor && destination[property].constructor === Object)) {
+                            destination[property] = {};
+                        }
+                        this.extend(destination[property], source[property]);
+                    } else {
+                        destination[property] = source[property];
+                    }
+                }
+                return destination;
+            }
+        }, {
             key: 'setup',
             value: function setup(obj) {
-                console.log(obj);
+
+                var baseConfig1 = baseConfig.current();
+
+                console.log(baseConfig1);
                 this.core();
                 return this;
             }

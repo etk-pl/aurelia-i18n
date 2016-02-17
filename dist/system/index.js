@@ -12,10 +12,6 @@ System.register(['./config-builder'], function (_export) {
       configCallback(builder);
     }
 
-    if (builder.resources.length === 0) {
-      builder.core();
-    }
-
     var resources = builder.resources;
 
     if (builder.useGlobalResources) {

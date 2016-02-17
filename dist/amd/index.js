@@ -13,10 +13,6 @@ define(['exports', './config-builder'], function (exports, _configBuilder) {
       configCallback(builder);
     }
 
-    if (builder.resources.length === 0) {
-      builder.core();
-    }
-
     var resources = builder.resources;
 
     if (builder.useGlobalResources) {

@@ -1,6 +1,5 @@
 import {AureliaI18nConfigBuilder} from './config-builder';
 
-
 export function configure(aurelia, configCallback) {
   let builder = new AureliaI18nConfigBuilder();
 
@@ -8,10 +7,7 @@ export function configure(aurelia, configCallback) {
     configCallback(builder);
   }
 
-  // Provide core if nothing was specified
-  if (builder.resources.length === 0) {
-    builder.core();
-  }
+
 
   // Pull the data off the builder
   let resources = builder.resources;

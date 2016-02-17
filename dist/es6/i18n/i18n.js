@@ -1,4 +1,4 @@
-import {customElement} from 'aurelia-framework';
+import {customElement,inject} from 'aurelia-framework';
 
 
 export class I18n {
@@ -7,5 +7,9 @@ export class I18n {
 		console.log("I18n");
 
 
+	}
+
+	get(){
+		console.log("i18n");
 	}
 }
