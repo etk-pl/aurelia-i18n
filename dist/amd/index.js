@@ -7,7 +7,7 @@ define(['exports', './config-builder'], function (exports, _configBuilder) {
   exports.configure = configure;
 
   function configure(aurelia, configCallback) {
-    var builder = new _configBuilder.AureliaUiConfigBuilder();
+    var builder = new _configBuilder.AureliaI18nConfigBuilder();
 
     if (configCallback !== undefined && typeof configCallback === 'function') {
       configCallback(builder);

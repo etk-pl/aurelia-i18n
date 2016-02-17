@@ -1,8 +1,8 @@
-import {AureliaUiConfigBuilder} from './config-builder';
+import {AureliaI18nConfigBuilder} from './config-builder';
 
 
 export function configure(aurelia, configCallback) {
-  let builder = new AureliaUiConfigBuilder();
+  let builder = new AureliaI18nConfigBuilder();
 
   if (configCallback !== undefined && typeof(configCallback) === 'function') {
     configCallback(builder);
