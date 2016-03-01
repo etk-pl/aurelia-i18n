@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-http-client';
 import {BaseConfig} from './i18n/base-config';
 
-@inject(BaseConfig)
 export class AureliaI18nConfigBuilder {
 
     resources: string[] = [];
@@ -24,18 +24,28 @@ export class AureliaI18nConfigBuilder {
     }
 
     setup(obj):AureliaI18nConfigBuilder {
+        BaseConfig.setDefault();
 
-        //var baseConfig = BaseConfig.current();
+        var obj=this.extend(BaseConfig.current(),obj);
 
-        //this.extend(obj);
-        console.log(obj)
+        var httpC = new HttpClient();
+        try{
+            httpC.get(obj.path).then(response => {
+                BaseConfig.setDef(JSON.parse(response.response));
+            });
+        }
+        catch (e)
+        {
+            console.log('error',e);
+        }
+
         this.core();
         return this;
     }
 
 
     core():AureliaI18nConfigBuilder {
-        this.resources.push('i18n/i18n');
+        this.resources.push('i18n/t');
         return this;
     }
 

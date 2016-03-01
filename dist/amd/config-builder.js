@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
+define(['exports', 'aurelia-framework', 'aurelia-http-client', './i18n/base-config'], function (exports, _aureliaFramework, _aureliaHttpClient, _i18nBaseConfig) {
     'use strict';
 
     Object.defineProperty(exports, '__esModule', {
@@ -8,8 +8,6 @@ define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
     var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-    var baseConfig = require('./i18n/base-config');
 
     var AureliaI18nConfigBuilder = (function () {
         function AureliaI18nConfigBuilder() {
@@ -39,17 +37,26 @@ define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
         }, {
             key: 'setup',
             value: function setup(obj) {
+                _i18nBaseConfig.BaseConfig.setDefault();
 
-                var baseConfig1 = baseConfig.current();
+                var obj = this.extend(_i18nBaseConfig.BaseConfig.current(), obj);
 
-                console.log(baseConfig1);
+                var httpC = new _aureliaHttpClient.HttpClient();
+                try {
+                    httpC.get(obj.path).then(function (response) {
+                        _i18nBaseConfig.BaseConfig.setDef(JSON.parse(response.response));
+                    });
+                } catch (e) {
+                    console.log('error', e);
+                }
+
                 this.core();
                 return this;
             }
         }, {
             key: 'core',
             value: function core() {
-                this.resources.push('i18n/i18n');
+                this.resources.push('i18n/t');
                 return this;
             }
         }]);

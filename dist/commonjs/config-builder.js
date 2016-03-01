@@ -10,7 +10,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var _aureliaFramework = require('aurelia-framework');
 
-var baseConfig = require('./i18n/base-config');
+var _aureliaHttpClient = require('aurelia-http-client');
+
+var _i18nBaseConfig = require('./i18n/base-config');
 
 var AureliaI18nConfigBuilder = (function () {
     function AureliaI18nConfigBuilder() {
@@ -40,17 +42,26 @@ var AureliaI18nConfigBuilder = (function () {
     }, {
         key: 'setup',
         value: function setup(obj) {
+            _i18nBaseConfig.BaseConfig.setDefault();
 
-            var baseConfig1 = baseConfig.current();
+            var obj = this.extend(_i18nBaseConfig.BaseConfig.current(), obj);
 
-            console.log(baseConfig1);
+            var httpC = new _aureliaHttpClient.HttpClient();
+            try {
+                httpC.get(obj.path).then(function (response) {
+                    _i18nBaseConfig.BaseConfig.setDef(JSON.parse(response.response));
+                });
+            } catch (e) {
+                console.log('error', e);
+            }
+
             this.core();
             return this;
         }
     }, {
         key: 'core',
         value: function core() {
-            this.resources.push('i18n/i18n');
+            this.resources.push('i18n/t');
             return this;
         }
     }]);
