@@ -1,6 +1,6 @@
 {
-  "name": "@etk/aurelia-i18n",
-  "version": "1.0.7",
+  "name": "aurelia-i18n",
+  "version": "1.0.8",
   "description": "ETK UI Aurelia plugin.",
   "keywords": [
     "etk",
