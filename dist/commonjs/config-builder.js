@@ -49,6 +49,7 @@ var AureliaI18nConfigBuilder = (function () {
             var httpC = new _aureliaHttpClient.HttpClient();
             try {
                 httpC.get(obj.path).then(function (response) {
+                    console.log(response);
                     _i18nBaseConfig.BaseConfig.setDef(JSON.parse(response.response));
                 });
             } catch (e) {

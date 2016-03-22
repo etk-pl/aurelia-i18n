@@ -44,6 +44,7 @@ define(['exports', 'aurelia-framework', 'aurelia-http-client', './i18n/base-conf
                 var httpC = new _aureliaHttpClient.HttpClient();
                 try {
                     httpC.get(obj.path).then(function (response) {
+                        console.log(response);
                         _i18nBaseConfig.BaseConfig.setDef(JSON.parse(response.response));
                     });
                 } catch (e) {

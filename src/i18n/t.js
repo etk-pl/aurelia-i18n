@@ -3,11 +3,11 @@ import {BaseConfig} from './base-config';
 
 export class TValueConverter {
 	toView(value,params) {
-		var def = BaseConfig.getDef();
+		var def = BaseConfig.getDef() || {};
 		var str='';
 		if(def.hasOwnProperty(value)){
 			str = def[value];
-			Object.getOwnPropertyNames(params).map((key)=>
+			Object.getOwnPropertyNames(params||{}).map((key)=>
 			{
 				str=str.replace("__" + key + "__", params[key]);
 			});

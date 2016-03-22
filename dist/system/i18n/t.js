@@ -23,11 +23,11 @@ System.register(['aurelia-framework', './base-config'], function (_export) {
 				_createClass(TValueConverter, [{
 					key: 'toView',
 					value: function toView(value, params) {
-						var def = BaseConfig.getDef();
+						var def = BaseConfig.getDef() || {};
 						var str = '';
 						if (def.hasOwnProperty(value)) {
 							str = def[value];
-							Object.getOwnPropertyNames(params).map(function (key) {
+							Object.getOwnPropertyNames(params || {}).map(function (key) {
 								str = str.replace("__" + key + "__", params[key]);
 							});
 						} else {

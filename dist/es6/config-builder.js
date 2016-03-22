@@ -31,6 +31,7 @@ export class AureliaI18nConfigBuilder {
         var httpC = new HttpClient();
         try{
             httpC.get(obj.path).then(response => {
+				console.log(response);
                 BaseConfig.setDef(JSON.parse(response.response));
             });
         }

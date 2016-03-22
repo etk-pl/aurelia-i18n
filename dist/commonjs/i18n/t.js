@@ -20,11 +20,11 @@ var TValueConverter = (function () {
 	_createClass(TValueConverter, [{
 		key: 'toView',
 		value: function toView(value, params) {
-			var def = _baseConfig.BaseConfig.getDef();
+			var def = _baseConfig.BaseConfig.getDef() || {};
 			var str = '';
 			if (def.hasOwnProperty(value)) {
 				str = def[value];
-				Object.getOwnPropertyNames(params).map(function (key) {
+				Object.getOwnPropertyNames(params || {}).map(function (key) {
 					str = str.replace("__" + key + "__", params[key]);
 				});
 			} else {

@@ -51,6 +51,7 @@ System.register(['aurelia-framework', 'aurelia-http-client', './i18n/base-config
                         var httpC = new HttpClient();
                         try {
                             httpC.get(obj.path).then(function (response) {
+                                console.log(response);
                                 BaseConfig.setDef(JSON.parse(response.response));
                             });
                         } catch (e) {
