@@ -1,22 +1,12 @@
-define(['exports', './config-builder'], function (exports, _configBuilder) {
-  'use strict';
+define(['exports'], function (exports) {
+	'use strict';
 
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
-  exports.configure = configure;
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+	exports.configure = configure;
 
-  function configure(aurelia, configCallback) {
-    var builder = new _configBuilder.AureliaI18nConfigBuilder();
-
-    if (configCallback !== undefined && typeof configCallback === 'function') {
-      configCallback(builder);
-    }
-
-    var resources = builder.resources;
-
-    if (builder.useGlobalResources) {
-      aurelia.globalResources(resources);
-    }
-  }
+	function configure(config) {
+		config.globalResources('./t.js');
+	}
 });
