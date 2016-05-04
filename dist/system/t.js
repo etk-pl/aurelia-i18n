@@ -33,7 +33,11 @@ System.register(['aurelia-http-client', 'utls'], function (_export) {
 						if (__defs.hasOwnProperty(value)) {
 							str = __defs[value];
 							Object.getOwnPropertyNames(params).map(function (key) {
-								str = str.replace("__" + key + "__", params[key]);
+								if (utls.getType(params[key]) === 'Moment') {
+									str = str.replace("__" + key + "__", params[key].format(__defs['dateFormat']));
+								} else {
+									str = str.replace("__" + key + "__", params[key]);
+								}
 							});
 						} else {
 							str = "!!" + value + "!!";

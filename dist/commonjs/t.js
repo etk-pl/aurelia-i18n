@@ -35,7 +35,11 @@ var TValueConverter = (function () {
 			if (__defs.hasOwnProperty(value)) {
 				str = __defs[value];
 				Object.getOwnPropertyNames(params).map(function (key) {
-					str = str.replace("__" + key + "__", params[key]);
+					if (_utls2['default'].getType(params[key]) === 'Moment') {
+						str = str.replace("__" + key + "__", params[key].format(__defs['dateFormat']));
+					} else {
+						str = str.replace("__" + key + "__", params[key]);
+					}
 				});
 			} else {
 				str = "!!" + value + "!!";
